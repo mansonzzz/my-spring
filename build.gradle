@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+group 'com.st'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    maven { url 'https://maven.aliyun.com/repository/spring/' }
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    aopallianceVersion = "1.0"
+    aspectjweaverVersion = "1.6.11"
+    cglibnodepVersion = "2.1_3"
+    lombokVersion = '1.18.24'
+    junitVersion = "5.8.1"
+}
+
+dependencies {
+    implementation "aopalliance:aopalliance:$aopallianceVersion"
+    runtimeOnly "org.aspectj:aspectjweaver:$aspectjweaverVersion"
+    implementation "cglib:cglib-nodep:$cglibnodepVersion"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
